@@ -36,7 +36,7 @@ class Rc522LiveData : LiveData<String>() {
         }
 
         override fun onUartDeviceError(uart: UartDevice, error: Int) {
-            Log.e(TAG, "UART device error ($error)");
+            Log.e(TAG, "UART device error ($error)")
         }
 
         private fun readFromUart(uart: UartDevice) {
