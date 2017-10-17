@@ -1,4 +1,4 @@
-package com.nilhcem.kidsroom
+package com.nilhcem.kidsroom.device.components
 
 import android.arch.lifecycle.LiveData
 import android.os.Handler

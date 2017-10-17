@@ -1,4 +1,4 @@
-package com.nilhcem.kidsroom
+package com.nilhcem.kidsroom.device
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -17,8 +17,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
+
         viewModel.rc522LiveData.observe(this, Observer { uid ->
             Log.i(TAG, "Uid=$uid")
+        })
+
+        viewModel.buttonsLiveData.observe(this, Observer { button ->
+            Log.i(TAG, "Button pressed: $button")
         })
     }
 
