@@ -9,6 +9,8 @@ class MainViewModel : ViewModel() {
         private val TAG = MainViewModel::class.java.simpleName!!
     }
 
+    val rc522LiveData by lazy { Rc522LiveData() }
+
     override fun onCleared() {
         Log.i(TAG, "onCleared")
     }
