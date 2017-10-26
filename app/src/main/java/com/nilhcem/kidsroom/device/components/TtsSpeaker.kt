@@ -19,8 +19,8 @@ class TtsSpeaker(private val context: Context, private val listener: Listener? =
     }
 
     interface Listener {
-        fun onTtsInitialized()
-        fun onTtsSpoken()
+        fun onTtsInitialized(speaker: TtsSpeaker)
+        fun onTtsSpoken(speaker: TtsSpeaker)
     }
 
     private var isInitialized = false
@@ -51,7 +51,7 @@ class TtsSpeaker(private val context: Context, private val listener: Listener? =
 
                 override fun onDone(utteranceId: String) {
                     Log.i(TAG, "onDone")
-                    listener?.onTtsSpoken()
+                    listener?.onTtsSpoken(this@TtsSpeaker)
                 }
 
                 override fun onError(utteranceId: String, errorCode: Int) {
@@ -68,7 +68,7 @@ class TtsSpeaker(private val context: Context, private val listener: Listener? =
 
             isInitialized = true
             Log.i(TAG, "TTS initialized successfully")
-            listener?.onTtsInitialized()
+            listener?.onTtsInitialized(this)
         } else {
             Log.w(TAG, "Could not open TTS Engine (onInit status=$status). Ignoring text to speech")
             ttsEngine = null

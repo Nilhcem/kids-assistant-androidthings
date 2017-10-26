@@ -2,10 +2,11 @@ package com.nilhcem.kidsroom.device.components
 
 import android.arch.lifecycle.LiveData
 import android.util.Log
+import com.google.android.things.contrib.driver.button.Button.OnButtonEventListener
 import com.google.android.things.contrib.driver.button.Button as DriverLayerButton
 import com.nilhcem.kidsroom.data.Button as DataLayerButton
 
-class ButtonsLiveData : LiveData<DataLayerButton>() {
+class ButtonsLiveData : LiveData<Pair<DataLayerButton, Boolean>>() {
 
     companion object {
         private val TAG = ButtonsLiveData::class.java.simpleName!!
@@ -14,21 +15,19 @@ class ButtonsLiveData : LiveData<DataLayerButton>() {
 
     private val DataLayerButton.gpio: String
         get() = when (this) {
-            DataLayerButton.RED -> "GPIO1_IO18"
-            DataLayerButton.GREEN -> "GPIO4_IO19"
-            DataLayerButton.BLUE -> "GPIO5_IO02"
-            DataLayerButton.YELLOW -> "GPIO4_IO22"
-            DataLayerButton.WHITE -> "GPIO4_IO21"
-            DataLayerButton.BLACK -> "GPIO2_IO03"
+            DataLayerButton.RED -> "GPIO_37"
+            DataLayerButton.GREEN -> "GPIO_32"
+            DataLayerButton.BLUE -> "GPIO_39"
+            DataLayerButton.YELLOW -> "GPIO_34"
+            DataLayerButton.WHITE -> "GPIO_33"
+            DataLayerButton.BLACK -> "GPIO_174"
         }
 
     private var buttons: Map<DriverLayerButton, DataLayerButton>? = null
 
-    private val listener = { button: DriverLayerButton, pressed: Boolean ->
-        if (pressed) {
-            buttons?.get(button)?.let {
-                value = it
-            }
+    private val listener = OnButtonEventListener { button: DriverLayerButton, pressed: Boolean ->
+        buttons?.get(button)?.let {
+            value = it to pressed
         }
     }
 

@@ -12,7 +12,7 @@ class Rc522LiveData : LiveData<String>() {
 
     companion object {
         private val TAG = Rc522LiveData::class.java.simpleName!!
-        private const val UART_NAME = "UART3"
+        private const val UART_NAME = "UART6"
         private const val UART_BUFFER_SIZE = 512
     }
 

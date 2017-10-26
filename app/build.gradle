@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.0'
+    compileSdkVersion rootProject.ext.sdk_version
+    buildToolsVersion rootProject.ext.build_tools_version
 
     defaultConfig {
         applicationId 'com.nilhcem.kidsroom'
-        minSdkVersion 27
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.min_sdk_version
+        targetSdkVersion rootProject.ext.sdk_version
         versionCode 1
         versionName '1.0'
     }
@@ -25,6 +25,8 @@ android {
 ext.support_version = '27.0.0'
 
 dependencies {
+    implementation project(':google-assistant')
+
     compileOnly 'com.google.android.things:androidthings:0.5.1-devpreview'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
