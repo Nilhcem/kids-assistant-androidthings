@@ -11,6 +11,7 @@ import com.nilhcem.kidsroom.R
 import com.nilhcem.kidsroom.data.RfidDevice
 import com.nilhcem.kidsroom.device.components.ChineseColorsSpeaker
 import com.nilhcem.kidsroom.device.components.MagicBlueRgbBulbBle
+import com.nilhcem.kidsroom.device.components.RelayFan
 import com.nilhcem.kidsroom.device.components.TtsSpeaker
 
 class MainActivity : AppCompatActivity() {
@@ -33,13 +34,14 @@ class MainActivity : AppCompatActivity() {
     private val lightbulb by lazy { MagicBlueRgbBulbBle(applicationContext) }
     private val ttsSpeaker by lazy { TtsSpeaker(this, ttsSpeakerListener) }
     private val chineseColors by lazy { ChineseColorsSpeaker(this) }
+    private val relayFan by lazy { RelayFan() }
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
 
-        lifecycle.addObservers(lightbulb, ttsSpeaker, assistant, chineseColors)
+        lifecycle.addObservers(lightbulb, ttsSpeaker, assistant, chineseColors, relayFan)
 
         viewModel.rc522LiveData.observe({ lifecycle }) { uid ->
             Log.i(TAG, "Uid=$uid")
