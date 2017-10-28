@@ -9,10 +9,7 @@ import android.util.Log
 import com.nilhcem.assistant.androidthings.googleassistant.AssistantHelper
 import com.nilhcem.kidsroom.R
 import com.nilhcem.kidsroom.data.RfidDevice
-import com.nilhcem.kidsroom.device.components.ChineseColorsSpeaker
-import com.nilhcem.kidsroom.device.components.MagicBlueRgbBulbBle
-import com.nilhcem.kidsroom.device.components.RelayFan
-import com.nilhcem.kidsroom.device.components.TtsSpeaker
+import com.nilhcem.kidsroom.device.components.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val lightbulb by lazy { MagicBlueRgbBulbBle(applicationContext) }
     private val ttsSpeaker by lazy { TtsSpeaker(this, ttsSpeakerListener) }
     private val chineseColors by lazy { ChineseColorsSpeaker(this) }
+    private val musicPlayer by lazy { MusicPlayer(this) }
     private val relayFan by lazy { RelayFan() }
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
@@ -41,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate")
 
-        lifecycle.addObservers(lightbulb, ttsSpeaker, assistant, chineseColors, relayFan)
+        lifecycle.addObservers(lightbulb, ttsSpeaker, assistant, chineseColors, musicPlayer, relayFan)
 
         viewModel.rc522LiveData.observe({ lifecycle }) { uid ->
             Log.i(TAG, "Uid=$uid")
@@ -65,7 +63,8 @@ class MainActivity : AppCompatActivity() {
 
                 when (rfidDevice) {
                     RfidDevice.TOTAKEKE -> {
-                        // Nursery rhymes
+                        // Music player
+                        musicPlayer.onButtonPressed(button)
                     }
                     RfidDevice.CRUZ -> {
                         // Control the fan

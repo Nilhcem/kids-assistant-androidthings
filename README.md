@@ -36,3 +36,8 @@ adb install -g app/build/outputs/apk/debug/app-debug.apk
 ```bash
 adb shell am start com.nilhcem.kidsroom/.device.MainActivity
 ```
+
+
+## Kudos
+
+- Music: [https://www.bensound.com/royalty-free-music](https://www.bensound.com/royalty-free-music)

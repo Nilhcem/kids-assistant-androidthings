@@ -50,8 +50,7 @@ class ChineseColorsSpeaker(private val context: Context) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun stop() {
-        soundPool!!.release()
-        soundPool = null
+        soundPool?.release().also { soundPool = null }
     }
 
     fun onButtonPressed(button: Button) {
