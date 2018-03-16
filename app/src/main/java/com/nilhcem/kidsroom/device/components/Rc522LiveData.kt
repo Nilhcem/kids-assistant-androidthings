@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
-import com.google.android.things.pio.PeripheralManagerService
+import com.google.android.things.pio.PeripheralManager
 import com.google.android.things.pio.UartDevice
 import com.google.android.things.pio.UartDeviceCallback
 
@@ -22,7 +22,7 @@ class Rc522LiveData : LiveData<String>() {
     private var uartDevice: UartDevice? = null
     private var pendingUartData = ""
 
-    private val callback = object : UartDeviceCallback() {
+    private val callback = object : UartDeviceCallback {
         override fun onUartDeviceDataAvailable(uart: UartDevice): Boolean {
             readFromUart(uart)
 
@@ -78,7 +78,7 @@ class Rc522LiveData : LiveData<String>() {
             handler = Handler(handlerThread.looper)
         }
 
-        uartDevice = PeripheralManagerService().openUartDevice(UART_NAME).apply {
+        uartDevice = PeripheralManager.getInstance().openUartDevice(UART_NAME).apply {
             setBaudrate(9600)
             setDataSize(8)
             setParity(UartDevice.PARITY_NONE)

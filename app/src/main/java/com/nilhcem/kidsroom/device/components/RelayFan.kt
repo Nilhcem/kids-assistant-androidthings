@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import com.google.android.things.pio.Gpio
-import com.google.android.things.pio.PeripheralManagerService
+import com.google.android.things.pio.PeripheralManager
 import com.nilhcem.kidsroom.data.Button
 
 class RelayFan : LifecycleObserver {
@@ -27,7 +27,7 @@ class RelayFan : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun start() {
-        relay = PeripheralManagerService().openGpio(GPIO_NAME).apply {
+        relay = PeripheralManager.getInstance().openGpio(GPIO_NAME).apply {
             setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
             setActiveType(Gpio.ACTIVE_LOW)
         }

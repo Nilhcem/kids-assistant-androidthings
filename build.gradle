@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.51'
+    ext.kotlin_version = '1.2.30'
 
     repositories {
         google()
@@ -7,9 +7,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.3'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.5'
     }
 }
 
@@ -26,8 +26,8 @@ task clean(type: Delete) {
 
 ext {
     sdk_version = 27
-    min_sdk_version = 26
-    build_tools_version = '27.0.0'
+    min_sdk_version = 27
+    build_tools_version = '27.0.3'
 
-    arch_version = '1.0.0-rc1'
+    arch_version = '1.1.0'
 }
