@@ -84,7 +84,7 @@ class Rc522LiveData : LiveData<String>() {
             setParity(UartDevice.PARITY_NONE)
             setStopBits(1)
 
-            registerUartDeviceCallback(callback, handler)
+            registerUartDeviceCallback(handler, callback)
         }
     }
 
